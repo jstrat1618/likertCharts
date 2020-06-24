@@ -1,4 +1,4 @@
-#http://rnotr.com/likert/ggplot/barometer/likert-plots/
+#Follows code found at: http://rnotr.com/likert/ggplot/barometer/likert-plots/
 library(ggplot2)
 library(reshape2)
 library(RColorBrewer)

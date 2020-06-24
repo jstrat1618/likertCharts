@@ -3,22 +3,22 @@
     "path": "~/Desktop/fun_projects/likertChartsInR/R/revised_rnot_tutorial.R",
     "project_path": "R/revised_rnot_tutorial.R",
     "type": "r_source",
-    "hash": "3733515405",
+    "hash": "2792255633",
     "contents": "",
     "dirty": false,
     "created": 1592966600803.0,
     "source_on_save": false,
     "relative_order": 7,
     "properties": {
-        "cursorPosition": "31,20",
-        "scrollLine": "30"
+        "cursorPosition": "0,78",
+        "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1592966634,
+    "lastKnownWriteTime": 1592999941,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1592966634783,
+    "last_content_update": 1592999941787,
     "read_only": false,
     "read_only_alternatives": []
 }

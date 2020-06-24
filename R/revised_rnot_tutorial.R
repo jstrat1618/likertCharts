@@ -1,4 +1,4 @@
-#Follows: rnot_tutorial.R
+#Follows code found at: http://rnotr.com/likert/ggplot/barometer/likert-plots/
 library(ggplot2)
 library(dplyr)
 library(tidyr)
