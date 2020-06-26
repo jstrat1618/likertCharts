@@ -30,7 +30,7 @@ qdat <-
   arrange(qnum)
 
 
-tdat2 <- 
+fdat <- 
   tdat %>%
   group_by(qid, answer) %>%
   summarise(
@@ -38,19 +38,19 @@ tdat2 <-
     num =n(), 
     .groups="drop") %>%
   full_join(qdat, by="qid") %>% 
-  mutate(pct = num/tot_responses,
+  mutate(prop = num/tot_responses,
          answer = factor(answer, ans_choices)) %>%
   arrange(answer, qnum)
 
 positives <- 
-  tdat2 %>%
+  fdat %>%
     filter(score >= 3) %>%
-  mutate(pct = if_else(score == 3, pct/2, pct))
+  mutate(prop = if_else(score == 3, prop/2, prop))
 
 negatives <- 
-  tdat2 %>%
+  fdat %>%
   filter(score <= 3) %>%
-  mutate(pct = if_else(score == 3, -pct/2, -pct))
+  mutate(prop = if_else(score == 3, -prop/2, -prop))
 
 
 #my_cols <- c('#544914', '#A79129', '#A6A6A6', '#558ED5', '#17375F')
@@ -59,10 +59,10 @@ my_cols <- c('red', 'pink', 'gray', 'cyan', 'blue')
 
 ggplot() + 
   geom_bar(data=positives, 
-           aes(x = reorder(Question, tot_neg_scores), y=pct, fill=answer), 
+           aes(x = reorder(Question, tot_neg_scores), y=prop, fill=answer), 
            position=position_stack(reverse = TRUE), stat="identity") +
   geom_bar(data=negatives,
-           aes(x =reorder(Question, tot_neg_scores), y=pct, fill=answer) , 
+           aes(x =reorder(Question, tot_neg_scores), y=prop, fill=answer) , 
            position="stack", stat="identity") +
   scale_fill_manual(values = my_cols, breaks = ans_choices) +
   geom_hline(yintercept = 0, color =c("white"), lty=2)+

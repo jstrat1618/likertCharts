@@ -3,7 +3,7 @@
     "path": "~/Desktop/fun_projects/likertChartsInR/R/hotel_survey.R",
     "project_path": "R/hotel_survey.R",
     "type": "r_source",
-    "hash": "506485906",
+    "hash": "0",
     "contents": "",
     "dirty": false,
     "created": 1592878546360.0,
@@ -11,15 +11,15 @@
     "relative_order": 3,
     "properties": {
         "tempName": "Untitled1",
-        "cursorPosition": "77,0",
+        "cursorPosition": "68,47",
         "scrollLine": "57"
     },
     "folds": "",
-    "lastKnownWriteTime": 1592957936,
+    "lastKnownWriteTime": 1593141760,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1592957936993,
+    "last_content_update": 1593141760909,
     "read_only": false,
     "read_only_alternatives": []
 }
