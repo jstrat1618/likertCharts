@@ -40,14 +40,14 @@ fdat <-
   full_join(qdat, by="qid") %>% 
   mutate(prop = num/tot_responses,
          answer = factor(answer, ans_choices)) %>%
-  arrange(answer, qnum)
+  arrange(qnum, answer)
 
-positives <- 
+pos_dat <- 
   fdat %>%
     filter(score >= 3) %>%
   mutate(prop = if_else(score == 3, prop/2, prop))
 
-negatives <- 
+neg_dat <- 
   fdat %>%
   filter(score <= 3) %>%
   mutate(prop = if_else(score == 3, -prop/2, -prop))
@@ -58,10 +58,10 @@ negatives <-
 my_cols <- c('red', 'pink', 'gray', 'cyan', 'blue')
 
 ggplot() + 
-  geom_bar(data=positives, 
+  geom_bar(data=pos_dat, 
            aes(x = reorder(Question, tot_neg_scores), y=prop, fill=answer), 
            position=position_stack(reverse = TRUE), stat="identity") +
-  geom_bar(data=negatives,
+  geom_bar(data=neg_dat,
            aes(x =reorder(Question, tot_neg_scores), y=prop, fill=answer) , 
            position="stack", stat="identity") +
   scale_fill_manual(values = my_cols, breaks = ans_choices) +
@@ -75,3 +75,44 @@ ggplot() +
         legend.key.size = unit(0.5, 'line'),
         legend.text = element_text(size = 9, family = 'Arial'),
         axis.text.y = element_text(size = 11, family = 'Arial')) 
+
+
+############
+#Gantt Chart
+# Q1  Strongly Disagree   begin       end
+# Q1  Disagree            '            '
+
+#
+begin <- function(x, scores){
+  neg <- -x[scores %in% c(1,2)]
+  neu <- -1/2*x[scores == 3]
+  
+  sum(c(neg, neu))
+}
+  
+gantt_dat <- 
+  fdat %>%
+  group_by(qid) %>%
+  mutate(gantt_start = begin(prop, score),
+         tot_prop = cumsum(prop),
+         prev_tot = dplyr::lag(tot_prop, 1, default = 0),
+         begin = gantt_start + prev_tot,
+         end = gantt_start + tot_prop) %>%
+  select(-gantt_start, - tot_prop, -prev_tot)
+
+gantt_dat %>%
+  ggplot(aes(x=begin, xend=end, 
+             y=reorder(Question, tot_neg_scores), yend=reorder(Question, tot_neg_scores),
+             col=answer))+
+  geom_segment(size=8.5)+
+  geom_vline(xintercept =0, color='white', lty=2)+
+  scale_color_manual(values = my_cols, breaks = ans_choices) +
+  scale_x_continuous(limits = c(-1,1), labels = scales::percent) +
+  theme_tufte()+
+  labs(x ='Percent', y='', col='', title = 'Hotel Survey') +
+  theme(plot.title = element_text(hjust = 0.5, size = 16, family = 'Arial', face='bold'),
+        legend.position = 'bottom',
+        legend.key.size = unit(0.5, 'line'),
+        legend.text = element_text(size = 9, family = 'Arial'),
+        axis.text.y = element_text(size = 11, family = 'Arial')) 
+
