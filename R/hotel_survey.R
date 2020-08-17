@@ -116,3 +116,4 @@ gantt_dat %>%
         legend.text = element_text(size = 9, family = 'Arial'),
         axis.text.y = element_text(size = 11, family = 'Arial')) 
 
+

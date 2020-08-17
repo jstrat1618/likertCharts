@@ -3,5 +3,5 @@ In learning about Likert charts, I wanted to record notes and code for future re
 
 ## References
 i.) Hotel Survey and Background knowledge https://www.youtube.com/watch?v=JodWmiIxl2c&t=10s
-ii.) "rnot_tutorial.R" and "revised_rnot_tutorial.R"- data and most code mentioned in "rnot_tutorial.R"
+ii.) "rnot_tutorial.R" and "revised_rnot_tutorial.R"- data and most code mentioned in "rnot_tutorial.R": http://rnotr.com/likert/ggplot/barometer/likert-plots/
 iii.) Data Revelations: (https://www.datarevelations.com/)- 
